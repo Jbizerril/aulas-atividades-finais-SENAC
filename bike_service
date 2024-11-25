@@ -1,0 +1,24 @@
+class BikeService:
+    def __init__(self):
+        self.bikes = []
+
+    def add_bike(self, bike):
+        if self.get_bike_by_model(bike.model):
+            return "Modelo já existente"
+        if bike.price < 100:
+            return "O preço deve ser superior a R$100"
+        self.bikes.append(bike)
+        return "Bicicleta adicionada com sucesso"
+
+    def get_bike_by_model(self, model):
+        for bike in self.bikes:
+            if bike.model == model:
+                return bike
+        return None
+
+    def mark_as_sold(self, model):
+        bike = self.get_bike_by_model(model)
+        if bike:
+            bike.status = 'Vendida'
+            return f"{bike.model} foi marcada como vendida"
+        return "Bicicleta não encontrada"

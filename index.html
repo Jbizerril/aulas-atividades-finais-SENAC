@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Bike Inventory</title>
+</head>
+<body>
+    <h1>Bike Inventory</h1>
+    
+    <form action="{{ url_for('bike.add_bike') }}" method="POST">
+        <input type="text" name="model" placeholder="Modelo" required>
+        <input type="text" name="category" placeholder="Categoria" required>
+        <input type="number" name="price" placeholder="Preço" required>
+        <button type="submit">Adicionar Bicicleta</button>
+    </form>
+
+    <h2>Lista de Bicicletas</h2>
+    <ul>
+        {% for bike in bikes %}
+            <li>{{ bike.model }} - {{ bike.category }} - R${{ bike.price }} - {{ bike.status }}
+                {% if bike.status == 'Disponível' %}
+                <a href="{{ url_for('bike.sell_bike', model=bike.model) }}">Marcar como vendida</a>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

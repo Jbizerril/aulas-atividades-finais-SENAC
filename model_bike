@@ -1,0 +1,6 @@
+class Bike:
+    def __init__(self, model, category, price, status='Disponível'):
+        self.model = model
+        self.category = category
+        self.price = price
+        self.status = status
